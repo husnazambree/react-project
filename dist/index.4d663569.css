@@ -1,0 +1,261 @@
+html {
+  --game-spacing: 32px;
+  --header-height: 4rem;
+  --color-success: #41c986;
+  --color-warning: #f2da60;
+  --color-error: #c32222;
+  --color-gray-100: #1a1a1a;
+  --color-gray-300: #404040;
+  --color-gray-500: gray;
+  --color-gray-700: #bfbfbf;
+  --color-gray-900: #e6e6e6;
+  overflow-y: scroll;
+}
+
+body {
+  color: #ff5eb8;
+  background-color: #ffe3f6;
+  font-family: Poppins, sans-serif;
+  font-weight: 700;
+}
+
+@media (height <= 600px) {
+  body {
+    --game-spacing: 8px;
+  }
+}
+
+button {
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  flex-direction: column;
+  min-height: 100%;
+  display: flex;
+}
+
+header {
+  height: var(--header-height);
+  display: flex;
+}
+
+header .side {
+  width: var(--header-height);
+  place-content: center;
+  display: grid;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: var(--header-height);
+  text-align: center;
+  flex: 1;
+}
+
+@media (width <= 25rem) {
+  h1 {
+    font-size: 1.25rem;
+  }
+}
+
+.game-wrapper {
+  gap: var(--game-spacing);
+  flex-direction: column;
+  flex: 1;
+  min-width: 250px;
+  max-width: min(400px, 40vh, 100%);
+  margin: 0 auto;
+  padding: 10px 0;
+  display: flex;
+}
+
+.guess {
+  gap: 4px;
+  margin-bottom: 4px;
+  display: flex;
+}
+
+.cell {
+  aspect-ratio: 1;
+  border: 4px solid var(--color-gray-900);
+  border-radius: var(--radius);
+  background-color: #fff;
+  place-content: center;
+  width: 20%;
+  font-size: 2rem;
+  display: grid;
+  position: relative;
+}
+
+.guess:first-of-type .cell:first-of-type {
+  --radius: 14px 0px 0px 0px;
+}
+
+.guess:first-of-type .cell:last-of-type {
+  --radius: 0px 14px 0px 0px;
+}
+
+.guess:last-of-type .cell:last-of-type {
+  --radius: 0px 0px 14px 0px;
+}
+
+.guess:last-of-type .cell:first-of-type {
+  --radius: 0px 0px 0px 14px;
+}
+
+.cell.correct {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: #fff;
+}
+
+.cell.incorrect {
+  background: var(--color-gray-500);
+  border-color: var(--color-gray-500);
+  color: #fff;
+}
+
+.cell.misplaced {
+  background: var(--color-warning);
+  border-color: var(--color-warning);
+  color: #fff;
+}
+
+.guess-input-wrapper {
+  flex-direction: column;
+  gap: 8px;
+  height: 6.75rem;
+  display: flex;
+}
+
+.guess-input-wrapper label {
+  font-size: 1.25rem;
+}
+
+.guess-input-wrapper input {
+  border: 4px solid var(--color-gray-900);
+  outline-offset: 4px;
+  color: inherit;
+  border-radius: 14px;
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 2rem;
+  display: block;
+}
+
+.banner {
+  text-align: center;
+  will-change: transform;
+  border-radius: 4px 4px 0 0;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 32px;
+  animation: .75s cubic-bezier(0, .72, .24, 1.02) slideUp;
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+}
+
+.happy.banner {
+  background: var(--color-success);
+  color: #fff;
+}
+
+.sad.banner {
+  background: var(--color-error);
+  color: #fff;
+}
+
+button.banner-button {
+  background-color: #ffffff24;
+  border-radius: 50px;
+  margin-top: 10px;
+  padding: 12px 20px;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  border: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+[data-reach-dialog-content] {
+  border-radius: 8px;
+  padding: 24px 32px;
+  position: relative;
+}
+
+.modal-close-btn {
+  cursor: pointer;
+  padding: 16px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.modal-title {
+  margin-bottom: .5em;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.keyboard {
+  flex-direction: column;
+  gap: 4px;
+  display: flex;
+}
+
+.keyboard-row {
+  justify-content: center;
+  gap: 4px;
+  display: flex;
+}
+
+.keyboard .letter {
+  background: #cfc3ff;
+  border-radius: 4px;
+  place-content: center;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  display: grid;
+}
+
+.keyboard .letter.correct {
+  background: var(--color-success);
+  color: #fff;
+}
+
+.keyboard .letter.incorrect {
+  background: var(--color-gray-500);
+  color: #fff;
+}
+
+.keyboard .letter.misplaced {
+  background: var(--color-warning);
+  color: #fff;
+}
+/*# sourceMappingURL=index.4d663569.css.map */
